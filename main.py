@@ -40,12 +40,11 @@ for file_name in file_name_array:
     if file_name.startswith('h'):
         df_h = get_dataframe(file_name)
 
-# df_all = pd.DataFrame(pd.concat([df_a, df_b, df_e, df_f, df_h]))
 df_all = pd.merge(df_a, df_b, how='outer')
 df_all = df_all.merge(df_e, how='outer')
 df_all = df_all.merge(df_f, how='outer')
 df_all = df_all.merge(df_h, how='outer')
-df_all.to_csv('D:/all.csv', index=False)
+
 condition = ((df_all['主要用途'] == '住家用') & (df_all['建物型態'].str.contains('住宅大樓')) & (
         df_all['總樓層數'].isnull() == False))
 filteredData = df_all[condition].reset_index(drop=True)
